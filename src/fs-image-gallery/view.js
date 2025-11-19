@@ -90,9 +90,46 @@ document.querySelectorAll('.fs-image-gallery__item').forEach((item) => {
         document.addEventListener('keydown', handleKeyboard);
         /* Keyboard navigation END */
 
+
+        /* Touch/swipe navigation START */
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const handleTouchStart = (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        };
+
+        const handleTouchEnd = (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        };
+
+        const handleSwipe = () => {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left - show next image
+                    lightbox.querySelector('.fs-image-gallery-lightbox__next').click();
+                } else {
+                    // Swiped right - show previous image
+                    lightbox.querySelector('.fs-image-gallery-lightbox__prev').click();
+                }
+            }
+        };
+
+        lightbox.addEventListener('touchstart', handleTouchStart);
+        lightbox.addEventListener('touchend', handleTouchEnd);
+        /* Touch/swipe navigation END */
+
+
+
         lightbox.addEventListener('remove', () => {
             document.removeEventListener('keydown', handleKeyboard);
             lightbox.removeEventListener('remove', this);
+            lightbox.removeEventListener('touchstart', handleTouchStart);
+            lightbox.removeEventListener('touchend', handleTouchEnd);              
             lightbox.remove();
             document.body.style.overflow = '';
         });

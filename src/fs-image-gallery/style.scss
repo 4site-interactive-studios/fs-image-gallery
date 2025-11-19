@@ -62,6 +62,8 @@
 	color: white;
 }
 .fs-image-gallery--caption-style--below .fs-image-gallery__item__caption {
+	display: block;
+	overflow: unset;
 	margin-top: 8px;
 }
 
@@ -102,8 +104,8 @@
 
 	&__close {
 		position: absolute;
-		top: 50px;
-		right: 50px;
+		top: 30px;
+		right: 10px;
 		font-weight: 900;
 		background-color: transparent;
 		cursor: pointer;

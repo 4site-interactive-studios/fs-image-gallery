@@ -5,7 +5,7 @@ return array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
 		'name' => 'fsig/fs-image-gallery',
-		'version' => '0.1.0',
+		'version' => '1.0',
 		'title' => '4Site Image Gallery',
 		'category' => 'media',
 		'icon' => 'images-alt2',

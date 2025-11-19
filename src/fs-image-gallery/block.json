@@ -12,6 +12,10 @@
 		"images": {
 			"type": "array",
 			"default": []
+		},
+		"caption_style": {
+			"type": "string",
+			"default": "none"
 		}
 	},
 	"supports": {

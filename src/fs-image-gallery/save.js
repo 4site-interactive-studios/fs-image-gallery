@@ -21,7 +21,7 @@ export default function save({ attributes }) {
 	return (
 		<div {...useBlockProps.save()}>
 			{images.length > 0 && (
-				<div className="fs-image-gallery" data-count={images.length}>
+				<div className={`fs-image-gallery fs-image-gallery--caption-style--${attributes.caption_style}`} data-count={images.length}>
 					{images.map((image) => (
 						<a key={image.id} className="fs-image-gallery__item" href={image.url} target="_blank" rel="noreferrer">
 							<div style={{backgroundImage: `url('${image.url}')`}} className="fs-image-gallery__item__image"></div>

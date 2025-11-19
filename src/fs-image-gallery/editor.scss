@@ -4,10 +4,6 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-fsig-fs-image-gallery {
-}
-
-
 .fs-image-gallery-preview {
 	display: flex;
 	flex-wrap: wrap;
@@ -26,6 +22,8 @@
 			top: 0;
 			right: 0;
 			font-weight: 900;
+			background-color: black;
+			color: white!important;
 		}
 
 		&__image {
@@ -37,7 +35,30 @@
 		}
 
 		&__caption {
-
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-size: 14px;
+			text-align: left;
+			padding: 4px;
+			width: 100%;
+			box-sizing: border-box;
 		}
 	}
+}
+
+.fs-image-gallery--caption-style--none .fs-image-gallery-preview__item__caption {
+	display: none;
+}
+.fs-image-gallery--caption-style--overlay .fs-image-gallery-preview__item__caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+}
+.fs-image-gallery--caption-style--below .fs-image-gallery-preview__item__caption {
+	margin-top: 8px;
 }

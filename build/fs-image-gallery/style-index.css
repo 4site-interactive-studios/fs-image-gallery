@@ -20,6 +20,7 @@
   width: 100%;
   display: block;
   text-decoration: none;
+  position: relative;
 }
 .fs-image-gallery__item__image {
   width: 100%;
@@ -27,6 +28,36 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+.fs-image-gallery__item__caption {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  text-align: left;
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.fs-image-gallery__item__caption:hover {
+  overflow: visible;
+  text-overflow: unset;
+  -webkit-line-clamp: unset;
+}
+.fs-image-gallery--caption-style--none .fs-image-gallery__item__caption {
+  display: none;
+}
+.fs-image-gallery--caption-style--overlay .fs-image-gallery__item__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.fs-image-gallery--caption-style--below .fs-image-gallery__item__caption {
+  margin-top: 8px;
 }
 .fs-image-gallery-lightbox {
   position: fixed;
@@ -44,6 +75,17 @@
   display: flex;
   justify-content: center;
 }
+.fs-image-gallery-lightbox__image-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.fs-image-gallery-lightbox__caption {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
 .fs-image-gallery-lightbox__image {
   max-width: 90%;
   max-height: 90%;
@@ -53,17 +95,33 @@
   top: 50px;
   right: 50px;
   font-weight: 900;
-  opacity: 0.5;
+  background-color: transparent;
+  cursor: pointer;
+}
+.fs-image-gallery-lightbox__close span {
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: white;
+  margin: 6px 0;
+  transform-origin: center;
+}
+.fs-image-gallery-lightbox__close span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 1px);
+}
+.fs-image-gallery-lightbox__close span:nth-child(2) {
+  transform: rotate(-45deg) translate(6px, -1px);
 }
 .fs-image-gallery-lightbox__next, .fs-image-gallery-lightbox__prev {
   position: absolute;
   height: 80vh;
   bottom: 10vh;
-  opacity: 0;
+  opacity: 0.1;
   font-size: 100px;
+  cursor: pointer;
 }
 .fs-image-gallery-lightbox__next:hover, .fs-image-gallery-lightbox__prev:hover {
-  opacity: 0;
+  opacity: 0.3;
 }
 .fs-image-gallery-lightbox__next {
   right: 0;

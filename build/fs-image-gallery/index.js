@@ -8,7 +8,7 @@
   \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fsig/fs-image-gallery","version":"0.1.0","title":"4Site Image Gallery","category":"media","icon":"images-alt2","description":"Provides an image gallery block for the Gutenberg editor.","example":{},"attributes":{"images":{"type":"array","default":[]}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"fs-image-gallery","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fsig/fs-image-gallery","version":"0.1.0","title":"4Site Image Gallery","category":"media","icon":"images-alt2","description":"Provides an image gallery block for the Gutenberg editor.","example":{},"attributes":{"images":{"type":"array","default":[]},"caption_style":{"type":"string","default":"none"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"fs-image-gallery","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -55,6 +55,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -90,15 +92,37 @@ function Edit({
       images: newImages
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Caption', 'image-gallery-block'),
+        initialOpen: true,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select style:', 'image-gallery-block'),
+          selected: attributes.caption_style,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'image-gallery-block'),
+            value: 'none'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Below', 'image-gallery-block'),
+            value: 'below'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Overlay', 'image-gallery-block'),
+            value: 'overlay'
+          }],
+          onChange: value => setAttributes({
+            caption_style: value
+          })
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "image-gallery-block-editor",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
           onSelect: onSelectImages,
           allowedTypes: ['image'],
-          multiple: true,
+          multiple: "add",
           value: images.map(img => img.id),
           render: ({
             open
@@ -110,15 +134,15 @@ function Edit({
           })
         })
       }), images.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "fs-image-gallery-preview",
+        className: `fs-image-gallery-preview fs-image-gallery--caption-style--${attributes.caption_style}`,
         "data-count": images.length,
         children: images.map((image, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "fs-image-gallery-preview__item",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             onClick: () => onRemoveImage(index),
             isDestructive: true,
-            isSmall: true,
             className: "fs-image-gallery-preview__item__remove",
+            size: "small",
             children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('X', 'image-gallery-block')
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             style: {
@@ -134,7 +158,7 @@ function Edit({
         className: "image-gallery-placeholder",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No images selected. Click the button above to add images.', 'image-gallery-block')
       })]
-    })
+    })]
   });
 }
 
@@ -247,7 +271,7 @@ function save({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
     children: images.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "fs-image-gallery",
+      className: `fs-image-gallery fs-image-gallery--caption-style--${attributes.caption_style}`,
       "data-count": images.length,
       children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
         className: "fs-image-gallery__item",

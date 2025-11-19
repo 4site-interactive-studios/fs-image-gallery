@@ -22,6 +22,8 @@ import { Button } from '@wordpress/components';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, RadioControl } from '@wordpress/components';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -55,12 +57,26 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<div {...useBlockProps()}>
+			<InspectorControls>
+				<PanelBody title={__('Caption', 'image-gallery-block')} initialOpen={true}>
+					<RadioControl
+						label={__('Select style:', 'image-gallery-block')}
+						selected={attributes.caption_style}
+						options={[
+							{ label: __('None', 'image-gallery-block'), value: 'none' },
+							{ label: __('Below', 'image-gallery-block'), value: 'below' },
+							{ label: __('Overlay', 'image-gallery-block'), value: 'overlay' },
+						]}
+						onChange={(value) => setAttributes({ caption_style: value })}
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<div className="image-gallery-block-editor">
 				<MediaUploadCheck>
 					<MediaUpload
 						onSelect={onSelectImages}
 						allowedTypes={['image']}
-						multiple
+						multiple='add'
 						value={images.map((img) => img.id)}
 						render={({ open }) => (
 							<Button
@@ -77,14 +93,14 @@ export default function Edit({ attributes, setAttributes }) {
 				</MediaUploadCheck>
 
 				{images.length > 0 && (
-					<div className="fs-image-gallery-preview" data-count={images.length}>
+					<div className={`fs-image-gallery-preview fs-image-gallery--caption-style--${attributes.caption_style}`} data-count={images.length}>
 						{images.map((image, index) => (
 							<div key={image.id} className="fs-image-gallery-preview__item">
 								<Button
 									onClick={() => onRemoveImage(index)}
 									isDestructive
-									isSmall
 									className="fs-image-gallery-preview__item__remove"
+									size="small"
 								>
 									{__('X', 'image-gallery-block')}
 								</Button>

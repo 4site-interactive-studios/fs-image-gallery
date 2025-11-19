@@ -19,6 +19,10 @@ return array(
 				'default' => array(
 					
 				)
+			),
+			'caption_style' => array(
+				'type' => 'string',
+				'default' => 'none'
 			)
 		),
 		'supports' => array(

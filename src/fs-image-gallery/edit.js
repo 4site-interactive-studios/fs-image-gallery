@@ -11,7 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+
+import { Button } from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,13 +31,78 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { images } = attributes;
+
+	const onSelectImages = (media) => {		
+		setAttributes({
+			images: media.map((img) => ({
+				id: img.id,
+				full_url: img.url,
+				alt: img.alt || '',
+				caption: img.caption || '',
+				url: img.sizes && img.sizes.large ? img.sizes.large.url : img.url,
+				orientation: img.orientation,
+			})),
+		});
+	};	
+
+	const onRemoveImage = (index) => {
+		const newImages = [...images];
+		newImages.splice(index, 1);
+		setAttributes({ images: newImages });
+	};
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'4Site Image Gallery – hello from the editor!',
-				'fs-image-gallery'
-			) }
-		</p>
+		<div {...useBlockProps()}>
+			<div className="image-gallery-block-editor">
+				<MediaUploadCheck>
+					<MediaUpload
+						onSelect={onSelectImages}
+						allowedTypes={['image']}
+						multiple
+						value={images.map((img) => img.id)}
+						render={({ open }) => (
+							<Button
+								onClick={open}
+								variant="primary"
+								className="image-gallery-upload-button"
+							>
+								{images.length === 0
+									? __('Upload Images', 'image-gallery-block')
+									: __('Edit Gallery', 'image-gallery-block')}
+							</Button>
+						)}
+					/>
+				</MediaUploadCheck>
+
+				{images.length > 0 && (
+					<div className="fs-image-gallery-preview" data-count={images.length}>
+						{images.map((image, index) => (
+							<div key={image.id} className="fs-image-gallery-preview__item">
+								<Button
+									onClick={() => onRemoveImage(index)}
+									isDestructive
+									isSmall
+									className="fs-image-gallery-preview__item__remove"
+								>
+									{__('X', 'image-gallery-block')}
+								</Button>
+								<div style={{backgroundImage: `url('${image.url}')`}} className="fs-image-gallery-preview__item__image"></div>
+								{image.caption && (
+									<div className="fs-image-gallery-preview__item__caption">{image.caption}</div>
+								)}
+							</div>
+						))}
+					</div>
+				)}
+
+				{images.length === 0 && (
+					<p className="image-gallery-placeholder">
+						{__('No images selected. Click the button above to add images.', 'image-gallery-block')}
+					</p>
+				)}
+			</div>
+		</div>
 	);
 }

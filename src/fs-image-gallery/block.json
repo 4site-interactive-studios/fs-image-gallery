@@ -8,8 +8,15 @@
 	"icon": "images-alt2",
 	"description": "Provides an image gallery block for the Gutenberg editor.",
 	"example": {},
+	"attributes": {
+		"images": {
+			"type": "array",
+			"default": []
+		}
+	},
 	"supports": {
-		"html": false
+		"html": false,
+		"align": ["wide", "full"]
 	},
 	"textdomain": "fs-image-gallery",
 	"editorScript": "file:./index.js",

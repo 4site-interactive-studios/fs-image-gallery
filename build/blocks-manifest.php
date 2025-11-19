@@ -13,8 +13,20 @@ return array(
 		'example' => array(
 			
 		),
+		'attributes' => array(
+			'images' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			)
+		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
 		),
 		'textdomain' => 'fs-image-gallery',
 		'editorScript' => 'file:./index.js',

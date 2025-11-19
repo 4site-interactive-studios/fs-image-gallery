@@ -15,10 +15,23 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function save({ attributes }) {
+	const { images } = attributes;
+
 	return (
-		<p { ...useBlockProps.save() }>
-			{ '4Site Image Gallery – hello from the saved content!' }
-		</p>
+		<div {...useBlockProps.save()}>
+			{images.length > 0 && (
+				<div className="fs-image-gallery" data-count={images.length}>
+					{images.map((image) => (
+						<a key={image.id} className="fs-image-gallery__item" href={image.url} target="_blank" rel="noreferrer">
+							<div style={{backgroundImage: `url('${image.url}')`}} className="fs-image-gallery__item__image"></div>
+							{image.caption && (
+								<div className="fs-image-gallery__item__caption">{image.caption}</div>
+							)}
+						</a>
+					))}
+				</div>
+			)}
+		</div>
 	);
 }

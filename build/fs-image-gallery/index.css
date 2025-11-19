@@ -6,8 +6,31 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-fsig-fs-image-gallery {
-  border: 1px dotted #f00;
+.fs-image-gallery-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  container-type: inline-size;
+}
+.fs-image-gallery-preview__item {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  max-width: 250px;
+  position: relative;
+}
+.fs-image-gallery-preview__item__remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 900;
+}
+.fs-image-gallery-preview__item__image {
+  width: 100%;
+  padding-bottom: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=index.css.map*/

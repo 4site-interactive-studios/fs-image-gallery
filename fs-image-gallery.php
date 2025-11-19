@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       4Site Image Gallery
  * Description:       Provides an image gallery block for the Gutenberg editor.
- * Version:           0.1.0
+ * Version:           1.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            MichaelW
@@ -11,12 +11,15 @@
  * Text Domain:       fs-image-gallery
  * Domain Path:       fsig
  *
- * @package Fsig
+ * @package fsig
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+require_once plugin_dir_path( __FILE__ ) . 'fsig-plugin-updates.php';
+
 /**
  * Registers the block using a `blocks-manifest.php` file, which improves the performance of block type registration.
  * Behind the scenes, it also registers all assets so they can be enqueued

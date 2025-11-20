@@ -12,7 +12,7 @@
 .fs-image-gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: 8px;
 	container-type: inline-size;
 
 	&__item {
@@ -20,6 +20,7 @@
 		display: block;
 		text-decoration: none;
 		position: relative;
+		border: none!important;
 
 		&__image {
 			width: 100%;
@@ -149,18 +150,18 @@
 
 @container (min-width: 400px) {
 	.fs-image-gallery__item {
-		width: calc(50% - 8px);
+		width: calc(50% - 4px);
 	}
 }
 
 @container (min-width: 768px) {
 	.fs-image-gallery__item {
-		width: calc(33.333% - 10.666px);
+		width: calc(33% - 6px);
 	}
 }
 
 @container (min-width: 1024px) {
 	.fs-image-gallery__item {
-		width: calc(25% - 12px);
+		width: calc(25% - 8px);
 	}
 }

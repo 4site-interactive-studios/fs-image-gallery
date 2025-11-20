@@ -1,6 +1,6 @@
 {
 	"name": "fs-image-gallery",
-	"version": "1.0",
+	"version": "1.0.0",
 	"description": "Provides an image gallery block for the Gutenberg editor.",
 	"author": "MichaelW",
 	"license": "GPL-2.0-or-later",

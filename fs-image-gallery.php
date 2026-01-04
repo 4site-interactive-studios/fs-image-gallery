@@ -61,3 +61,18 @@ function fsig_fs_image_gallery_block_init() {
 	}
 }
 add_action( 'init', 'fsig_fs_image_gallery_block_init' );
+
+function ffsig_plugin_data() {
+    if(!function_exists('get_plugin_data')) {
+        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    }
+    return get_plugin_data(__FILE__);
+}
+
+function fsig_plugin_basename() {
+    return plugin_basename(__FILE__);
+}
+
+function fsig_plugin_path() {
+    return plugin_dir_path(__FILE__);
+}
